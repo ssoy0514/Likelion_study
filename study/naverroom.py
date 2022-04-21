@@ -46,15 +46,16 @@ writer = csv.writer(file)
 writer.writerow(["name","address"])
 final_result = []
 time.sleep(1)
+
 # # 반복 시작
 i=1
-while i<=6
- #몇 페이지까지 크롤링할 것인지 지정
-   rooms_box = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/ul")
-   rooms = rooms_box.find_elements_by_css_selector("li._22p-O._2NEjP")
-   #해당 페이지에서 표시된 모든 가게 정보
+while i == 1:
+    #몇 페이지까지 크롤링할 것인지 지정
+    rooms_box = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/ul")
+    rooms = rooms_box.find_elements_by_css_selector("li._22p-O._2NEjP")
+    #해당 페이지에서 표시된 모든 가게 정보
    
-   for room in rooms: #한 페이지 내에서의 반복문. 순차적으로 가게 정보에 접근
+    for room in rooms: #한 페이지 내에서의 반복문. 순차적으로 가게 정보에 접근
        name = room.find_element_by_css_selector("span._3Apve").text #가게 이름
        time.sleep(2)
        click_name = room.find_element_by_css_selector("span._3Apve")
@@ -95,10 +96,7 @@ while i<=6
        time.sleep(1)
        # 한 페이지 크롤링 끝
     
-    next_button = driver.find_element_by_css_selector("svg._2bgjk")
-    next_button.click()
-    si = i+1
-   time.sleep(2)
+    i += 1
 
 
 for result in final_result: #크롤링한 가게 정보에 순차적으로 접근 & csv 파일 작성
