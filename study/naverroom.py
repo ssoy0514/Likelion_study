@@ -1,17 +1,18 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC #selenium에서 사용할 모듈 import
-
 import time
 import requests
 from bs4 import BeautifulSoup
 import re
 import csv
-driver = webdriver.Chrome("./chromedriver.exe") #selenium 사용에 필요한 chromedriver.exe 파일 경로 지정
 
-driver.get("https://map.naver.com/v5/?c=14138086.5321113,4521084.3550941,13,0,0,0,dh") #네이버 신 지도 
+driver = webdriver.Chrome(ChromeDriverManager().install()) #selenium 사용에 필요한 chromedriver.exe 파일 경로 지정
+
+driver.get("https://map.naver.com/v5/?c=14138086.5321113,4521084.3550941,13,0,0,0,dh") #네이버 지도 
 
 search_box = driver.find_element_by_class_name("input_search")
 search_box.send_keys("안암 원룸")
@@ -50,7 +51,7 @@ time.sleep(1)
 # # 반복 시작
 i=1
 while i == 1:
-    #몇 페이지까지 크롤링할 것인지 지정
+    
     rooms_box = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/ul")
     rooms = rooms_box.find_elements_by_css_selector("li._22p-O._2NEjP")
     #해당 페이지에서 표시된 모든 가게 정보
